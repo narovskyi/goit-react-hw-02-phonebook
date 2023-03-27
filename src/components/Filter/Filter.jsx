@@ -1,8 +1,12 @@
 const Filter = ({filter, onChange}) => (
     <>
-        <label htmlFor="filter">Filter</label>
-        <br />
-        <input type="text" name='filter' onChange={onChange} value={filter}/>
+        <input
+            type="text"
+            name='filter'
+            placeholder="Filter"
+            onChange={onChange}
+            value={filter}
+        />
     </>
 );
 

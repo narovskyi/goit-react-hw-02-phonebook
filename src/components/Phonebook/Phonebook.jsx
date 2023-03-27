@@ -13,8 +13,6 @@ class Phonebook extends Component {
             {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}
         ],
         filter: '',
-        name: '',
-        number: ''
     }
 
     inputValueHandler = (e) => {
@@ -23,9 +21,8 @@ class Phonebook extends Component {
         });
     }
 
-    addContactHandler = (e) => {
-        e.preventDefault();
-        const normilizedName = this.state.name.toLowerCase();
+    addContactHandler = (values, { resetForm }) => {
+        const normilizedName = values.name.toLowerCase();
         const sameName = this.state.contacts.filter(contact => contact.name.toLowerCase() === normilizedName);
         if (sameName.length > 0) {
             alert(`${sameName[0].name} is already in contacts`);
@@ -36,15 +33,12 @@ class Phonebook extends Component {
                 ...this.state.contacts,
                 {
                     id: nanoid(),
-                    name: this.state.name,
-                    number: this.state.number
+                    ...values
                 }
             ]
         });
-        this.setState({
-            name: '',
-            number: ''
-        })
+        console.log(values);
+        resetForm();
     }
 
     deleteContact = (id) => {
@@ -55,17 +49,14 @@ class Phonebook extends Component {
     }
 
     render() {
-        const { name, number, filter, contacts } = this.state;
+        const { contacts, filter } = this.state;
         const normilizedFilter = filter.toLowerCase();
         const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normilizedFilter));
         return (
             <>
                 <h2>Phonebook</h2>
                 <UserAddForm
-                    name={name}
-                    number={number}
-                    onChange={this.inputValueHandler}
-                    addingContact={this.addContactHandler}
+                    addContact={this.addContactHandler}
                 />
                 <Filter filter={filter} onChange={this.inputValueHandler}/>
                 <Contacts contacts={visibleContacts} onClick={ this.deleteContact}/>
