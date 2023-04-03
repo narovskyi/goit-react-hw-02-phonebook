@@ -1,6 +1,9 @@
-const Filter = ({filter, onChange}) => (
+import { Input } from "./Filter.styled";
+import PropTypes from 'prop-types';
+
+const Filter = ({ filter, onChange }) => (
     <>
-        <input
+        <Input
             type="text"
             name='filter'
             placeholder="Filter"
@@ -9,5 +12,10 @@ const Filter = ({filter, onChange}) => (
         />
     </>
 );
+
+Filter.propTypes = {
+    filter: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
+}
 
 export default Filter;

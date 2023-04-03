@@ -1,17 +1,31 @@
-const Contacts = ({contacts, onClick}) => (
+import { Title, List, Button, ListItem } from "./Contacts.styled";
+import PropTypes from 'prop-types';
+
+const Contacts = ({ contacts, onClick }) => (
     <>
-        <h2>Contacts</h2>
-        <ul>
+        <Title>Contacts</Title>
+        <List>
             {contacts.map(({ name, id, number }) => (
-                <li key={id}>
-                    {name}: <span>{number}</span>
-                    <button onClick={()=>{onClick(id)}}>
+                <ListItem key={id}>
+                     <Button onClick={()=>{onClick(id)}}>
                         Delete
-                    </button>
-                </li>
+                    </Button>
+                    {name}: <span>{number}</span>
+                </ListItem>
             ))}   
-        </ul>
+        </List>
     </>
 );
+
+Contacts.propTypes = {
+    contacts: PropTypes.arrayOf(
+        PropTypes.exact({
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired
+        })
+    ).isRequired,
+    onClick: PropTypes.func.isRequired
+}
 
 export default Contacts;

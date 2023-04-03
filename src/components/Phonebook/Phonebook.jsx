@@ -38,7 +38,6 @@ class Phonebook extends Component {
                 }
             ]
         });
-        console.log(values);
         resetForm();
     }
 

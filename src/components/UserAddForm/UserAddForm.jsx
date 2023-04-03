@@ -1,6 +1,7 @@
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Input, ErrorNotification, Button } from 'components/UserAddForm/UserAddForm.styled';
+import PropTypes from 'prop-types';
 
 const initialValues = {
     name: '',
@@ -12,7 +13,7 @@ const validationSchema = Yup.object().shape({
     number: Yup.string().required('Required!').min(4, 'Number is too short!')
 });
 
-const UserAddForm = ({addContact }) => (
+const UserAddForm = ({ addContact }) => (
     <>
         <Formik
             initialValues={initialValues}
@@ -52,5 +53,9 @@ const UserAddForm = ({addContact }) => (
         </Formik>
     </>
 );
+
+UserAddForm.propTypes = {
+    addContact: PropTypes.func.isRequired
+}
 
 export default UserAddForm;
